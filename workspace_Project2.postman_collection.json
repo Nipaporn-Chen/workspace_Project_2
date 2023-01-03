@@ -141,6 +141,13 @@
 							"});\r",
 							"\r",
 							" var responseData = pm.response.json();\r",
+							"\r",
+							" //Save value in a Environment Variable id\r",
+							"postman.setEnvironmentVariable(\"id\", responseData[0].id);\r",
+							"\r",
+							"//Save value in a Environment Variable userId\r",
+							"postman.setEnvironmentVariable(\"userId\", responseData[0].userId);\r",
+							"\r",
 							"//Verify name contains expected result\r",
 							"pm.test(\"Verify name or member of endpoint matches Default successfully\", function () {   \r",
 							"    console.log();\r",
@@ -169,6 +176,36 @@
 							"\r",
 							"\r",
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Pre-script to refresh token in case if we have to run API testing longer than the token time given\r",
+							"const postRequest = {\r",
+							"    url: 'https://api.octoperf.com/public/users/login',\r",
+							"    method: 'POST',\r",
+							"    timeout: 0,\r",
+							"    header: {\r",
+							"        \"Conten-Type\" : \"application/x-WWW-form-urlencoded\"\r",
+							"    },\r",
+							"    body:{\r",
+							"        mode: 'urlencoded',\r",
+							"        urlencoded: [\r",
+							"            {key: \"username\", value : \"amp6722.ja@gmail.com\"},\r",
+							"            {key: \"password\", value : \"HoneyHippo@2472#\"},\r",
+							"        ]}\r",
+							"    \r",
+							"};\r",
+							"pm.sendRequest(postRequest, function (err, res) {\r",
+							"    var responJson = res.json();\r",
+							"    console.log(responJson);\r",
+							"    pm.environment.set('ACCESS_TOKEN', responJson['token']);\r",
+							"\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -264,7 +301,6 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"\r",
 							""
 						],
 						"type": "text/javascript"

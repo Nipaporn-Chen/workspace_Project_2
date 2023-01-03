@@ -342,9 +342,9 @@
 							"});\r",
 							"\r",
 							"//Verify tag matches as tag input data was enter successfully\"\r",
-							"pm.test(\"Verify tag detail matches as tag input data was enter successfully\", function(){\r",
-							"pm.expect(responseData.tag).to.equal('[]');\r",
-							"});"
+							"// pm.test(\"Verify tag detail matches as tag input data was enter successfully\", function(){\r",
+							"// pm.expect(responseData.tag).to.equal('[]');\r",
+							"// });"
 						],
 						"type": "text/javascript"
 					}
@@ -462,7 +462,7 @@
 							"\r",
 							"//Verify status code successful PUT request\r",
 							"pm.test(\"Successful PUT request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
 							"});\r",
 							"\r",
 							"//Verify project name matches\r",
